@@ -51,6 +51,21 @@ ProiectAplicatieIndex/
 3. Install dependencies
 4. Set up `.env` and run migrations
 5. Start the server
+## Git Workflow
+
+This project uses two main branches:
+
+- `main` — stable production version
+- `preprod` — staging environment for testing changes before release
+
+### Typical Workflow
+
+1. Work on `preprod` branch:
+   ```bash
+   git checkout preprod
+   git add .
+   git commit -m "Your changes"
+   git push origin preprod
 
 ## License
 
