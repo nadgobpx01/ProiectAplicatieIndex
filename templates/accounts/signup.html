@@ -1,0 +1,27 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h2 class="mb-4">Inregistrare cont</h2>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary mt-2">Creeaza cont</button>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <div class="alert alert-info">
+                <h5>Recomandari parola:</h5>
+                <ul class="mb-0">
+                    <li>Minim 8 caractere</li>
+                    <li>Include litere și cifre</li>
+                    <li>Nu folosi numele personal</li>
+                    <li>Evita parole uzuale (ex: 12345678)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

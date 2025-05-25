@@ -1,0 +1,12 @@
+{% extends "core/base.html" %}
+{% block content %}
+  <div class="container mt-4">
+    <h2 class="text-center">Formular Tranzactie</h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn btn-primary">Salveaza</button>
+    </form>
+  </div>
+{% endblock %}
+

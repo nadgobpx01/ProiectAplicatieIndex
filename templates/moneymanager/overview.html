@@ -1,0 +1,132 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+  <!-- Formular Filtrare -->
+  <form method="get" class="row g-3 mb-4 shadow-sm bg-white p-4 rounded" style="max-width: 720px; margin: 0 auto;">
+    <div class="col-md-5">
+      {{ form.start_date.label_tag }}
+      {{ form.start_date }}
+    </div>
+    <div class="col-md-5">
+      {{ form.end_date.label_tag }}
+      {{ form.end_date }}
+    </div>
+    <div class="col-md-2 align-self-end">
+      <button type="submit" class="btn btn-primary w-100">Filtrează</button>
+    </div>
+  </form>
+
+  <!-- Totaluri -->
+  <div class="row text-center mb-4 mt-3">
+    <div class="col-md-4">
+      <h5>Total venituri</h5>
+      <p class="text-success fw-bold">{{ total_income|floatformat:2 }} RON</p>
+    </div>
+    <div class="col-md-4">
+      <h5>Total cheltuieli</h5>
+      <p class="text-danger fw-bold">{{ total_expense|floatformat:2 }} RON</p>
+    </div>
+    <div class="col-md-4">
+      <h5>Sold curent</h5>
+      <p class="fw-bold {% if global_sold >= 0 %}text-success{% else %}text-danger{% endif %}">
+        {{ global_sold|floatformat:2 }} RON
+      </p>
+    </div>
+  </div>
+
+  <!-- Butoane adăugare și PDF în linie -->
+  <div class="d-flex justify-content-end align-items-center gap-2 flex-wrap mb-3">
+    <a href="{% url 'moneymanager:transaction-add' %}" class="btn btn-primary">Adaugă tranzacție</a>
+    <a href="{% url 'moneymanager:category-add' %}" class="btn btn-secondary">Adaugă categorie</a>
+    <a href="{% url 'moneymanager:export-pdf' %}?start_date={{ start_date }}&end_date={{ end_date }}" class="btn btn-outline-dark">
+      Trimite raport PDF pe email
+    </a>
+    <a href="{% url 'moneymanager:export-pdf' %}?start_date={{ start_date }}&end_date={{ end_date }}&mode=download" class="btn btn-success">
+      Descarcă PDF
+    </a>
+  </div>
+
+  <!-- Tabel tranzacții -->
+  <h4>Tranzacții în perioada selectată:</h4>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Data</th>
+        <th>Categorie</th>
+        <th>Tip</th>
+        <th>Suma</th>
+        <th>Descriere</th>
+        <th>Acțiuni</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for transaction in transactions %}
+        <tr>
+          <td>{{ transaction.date|date:"j M Y" }}</td>
+          <td>{{ transaction.category.name }}</td>
+          <td>
+            {% if transaction.category.is_income %}
+              <span class="text-success">Venit</span>
+            {% else %}
+              <span class="text-danger">Cheltuială</span>
+            {% endif %}
+          </td>
+          <td class="{% if transaction.category.is_income %}text-success{% else %}text-danger{% endif %}">{{ transaction.amount|floatformat:2 }}</td>
+          <td>{{ transaction.description }}</td>
+          <td>
+            <a href="{% url 'moneymanager:transaction-edit' transaction.pk %}" class="btn btn-sm btn-outline-dark">Edit</a>
+            <a href="{% url 'moneymanager:transaction-delete' transaction.pk %}" class="btn btn-sm btn-outline-danger">Șterge</a>
+          </td>
+        </tr>
+      {% empty %}
+        <tr><td colspan="6" class="text-center">Nu există tranzacții în perioada selectată.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <!-- Grafic -->
+  <div style="height: 300px;">
+    <canvas id="overviewChart"></canvas>
+  </div>
+</div>
+
+<script src="{% static 'js/chart.min.js' %}"></script>
+<script>
+  const ctx = document.getElementById('overviewChart').getContext('2d');
+  const soldValue = {{ global_sold|default:0 }};
+  const soldColor = soldValue < 0 ? '#dc3545' : '#0d6efd';
+
+  const chart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Venituri', 'Cheltuieli', 'Sold'],
+      datasets: [{
+        label: 'Suma (RON)',
+        data: [
+          {{ total_income|default:0 }},
+          {{ total_expense|default:0 }},
+          soldValue
+        ],
+        backgroundColor: [
+          '#198754',
+          '#dc3545',
+          soldColor
+        ]
+      }]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true,
+      plugins: {
+        legend: { display: false },
+        title: { display: true, text: 'Statistici financiare' }
+      },
+      scales: {
+        x: { beginAtZero: true }
+      }
+    }
+  });
+</script>
+{% endblock %}

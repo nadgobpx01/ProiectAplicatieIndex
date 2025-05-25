@@ -1,0 +1,13 @@
+{% extends "core/base.html" %}
+{% block content %}
+  <div class="container mt-4">
+    <h2 class="text-center text-danger">Confirmare ștergere</h2>
+    <p class="text-center">Esti sigur ca vrei să stergi categoria <strong>{{ object.name }}</strong>?</p>
+    <form method="post">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-danger">Confirma</button>
+      <a href="{% url 'moneymanager:category-list' %}" class="btn btn-secondary">Renunta</a>
+    </form>
+  </div>
+{% endblock %}
+

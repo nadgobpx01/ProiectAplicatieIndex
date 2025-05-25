@@ -1,0 +1,31 @@
+{% extends "core/base.html" %}
+{% block content %}
+<div class="container mt-4">
+  <h2 class="text-center mb-4">Articole recente</h2>
+  {% if posts %}
+    <div class="row justify-content-center">
+      {% for post in posts %}
+        <div class="col-md-6 mb-4">
+          <div class="card h-100 shadow-sm text-center">
+            {% if post.image %}
+              <img src="{{ post.image.url }}"
+                   alt="{{ post.title }}"
+                   style="max-width: 300px; height: auto; margin: 0 auto; border-radius: 8px;">
+            {% endif %}
+            <div class="card-body">
+              <h5 class="card-title">{{ post.title }}</h5>
+              <p class="card-text">{{ post.content|truncatewords:20 }}</p>
+              <a href="{% url 'blog:post-detail' post.pk %}" class="btn btn-sm btn-outline-primary">Citeste mai mult</a>
+            </div>
+            <div class="card-footer text-muted small">
+              Publicat: {{ post.created_at|date:"d M Y H:i" }}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="alert alert-light text-center">Nu exista articole disponibile.</div>
+  {% endif %}
+</div>
+{% endblock %}

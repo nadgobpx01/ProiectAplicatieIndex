@@ -1,0 +1,25 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h2 class="mb-4 text-center">Adaugă Consum Utilități</h2>
+            <form method="post" class="card p-4 shadow">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">Salvează</button>
+            </form>
+
+            <div class="mt-4 alert alert-info">
+                <h5>Informații utile:</h5>
+                <ul>
+                    <li>Selectează tipul de utilitate: apă, curent sau gaze</li>
+                    <li>Indexul vechi se preia automat dacă există</li>
+                    <li>Costul este calculat automat: consum x preț/unitate</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

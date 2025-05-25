@@ -1,0 +1,85 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block content %}
+<style>
+  body {
+    background: url("{% static 'assets/img/coins.jpg' %}") no-repeat center center fixed;
+    background-size: cover;
+  }
+
+  .card {
+    opacity: 0.96;
+    border-radius: 0.5rem;
+    min-height: 160px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: fadeInUp 0.6s ease forwards;
+  }
+
+  .card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+
+<div class="container mt-5">
+  <div class="row justify-content-between g-4">
+
+    <div class="col-md-6">
+      <div class="card text-white bg-danger mb-3">
+        <div class="card-header">1. Gestionare Tranzacții</div>
+        <div class="card-body">
+          <p class="card-text">
+            Adaugă, editează sau șterge tranzacțiile tale zilnice: cheltuieli și venituri.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card text-white bg-success mb-3">
+        <div class="card-header">2. Categorii Personalizate</div>
+        <div class="card-body">
+          <p class="card-text">
+            Organizează-ți bugetul pe categorii (mâncare, transport, salariu etc).
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card text-white bg-warning mb-3">
+        <div class="card-header">3. Overview & Grafic</div>
+        <div class="card-body">
+          <p class="card-text">
+            Vizualizează soldul total și un grafic al evoluției cheltuielilor/veniturilor.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card text-white bg-dark mb-3">
+        <div class="card-header">4. Acces Protejat</div>
+        <div class="card-body">
+          <p class="card-text">
+            Autentificare securizată, cont propriu, date private și confidențiale.
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

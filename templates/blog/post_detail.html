@@ -1,0 +1,22 @@
+{% extends "core/base.html" %}
+{% block content %}
+<div class="container mt-4">
+  <h2 class="text-center mb-4">{{ post.title }}</h2>
+
+  {% if post.image %}
+    <div class="text-center mb-4">
+      <img src="{{ post.image.url }}"
+           alt="{{ post.title }}"
+           style="max-width: 300px; height: auto; border-radius: 8px;">
+    </div>
+  {% endif %}
+
+  <div class="mb-4 text-center">
+    <p>{{ post.content }}</p>
+  </div>
+
+  <div class="text-muted text-center small">
+    Publicat: {{ post.created_at|date:"d M Y H:i" }}
+  </div>
+</div>
+{% endblock %}

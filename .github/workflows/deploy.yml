@@ -1,0 +1,15 @@
+name: Deploy Django App to Local Server
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Execută scriptul local de actualizare
+        run: bash /opt/django_app/scripts/update_project.sh

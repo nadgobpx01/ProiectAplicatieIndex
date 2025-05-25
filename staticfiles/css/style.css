@@ -1,0 +1,130 @@
+/* Fundal general */
+body {
+    background-color: #00b4f5;
+    background-image: url("https://www.transparenttextures.com/patterns/beige-paper.png");
+    font-family: 'Roboto', sans-serif;
+    color: #1f1f1f;
+    margin: 0;
+}
+
+/* NAVBAR */
+.navbar {
+    background-color: #ffffff !important;
+    border-bottom: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.navbar .nav-link {
+    color: #1f1f1f !important;
+    font-weight: 500;
+    margin-right: 15px;
+    transition: color 0.3s;
+}
+
+.navbar .nav-link:hover {
+    color: #00b4f5 !important;
+}
+
+.navbar .btn-outline-primary {
+    border-color: #00b4f5;
+    color: #00b4f5;
+}
+
+.navbar .btn-outline-primary:hover {
+    background-color: #00b4f5;
+    color: #fff;
+}
+
+.navbar .btn-primary {
+    background-color: #00b4f5;
+    border-color: #00b4f5;
+}
+
+.navbar .btn-primary:hover {
+    background-color: #009bd6;
+}
+
+/* CARDURI */
+.card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0 0 15px rgba(0, 180, 245, 0.15);
+    transition: all 0.3s ease;
+    color: #1f1f1f;
+}
+
+.card:hover {
+    box-shadow: 0 0 25px rgba(0, 180, 245, 0.4);
+}
+
+.card-header {
+    background-color: #f9f9f9;
+    border-bottom: 1px solid #ddd;
+    color: #1f1f1f;
+}
+
+.card-title a {
+    color: #00b4f5;
+    text-decoration: none;
+}
+
+.card-title a:hover {
+    color: #008fce;
+}
+
+/* FORMULARE (LOGIN / SIGNUP) */
+form {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+    max-width: 400px;
+    margin: 40px auto;
+}
+
+form input[type="text"],
+form input[type="password"] {
+    background-color: #f2f2f2;
+    color: #1f1f1f;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+form input[type="submit"],
+form button {
+    background-color: #00b4f5;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+}
+
+form input[type="submit"]:hover,
+form button:hover {
+    background-color: #009bd6;
+}
+
+/* LINKURI GENERALE */
+a {
+    color: #00b4f5;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #008fce;
+    text-decoration: underline;
+}
+
+/* TEXT color special */
+.text-success {
+    color: #009e7f !important;
+}
+
+.text-danger {
+    color: #d9534f !important;
+}
